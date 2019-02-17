@@ -25,7 +25,7 @@ Changing the type of data sent<br>
 multiclient
 
 
-|  Sno |  Sending time  |  Service Time |  
+|  no. of clients |  Sending time  |  Service Time |  
 |---|---|---|
 | 1 |    0.000004|  0.000004  | 
 |  2 |   0.000006 |  0.000005  |  

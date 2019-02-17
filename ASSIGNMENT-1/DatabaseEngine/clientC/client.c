@@ -25,6 +25,7 @@ int main()
     int mid=msgget(clikey,0666 | IPC_CREAT); 
 while(1){
  	scanf(" %[^\n]",m);
+	message.id=2;
  	strcpy(message.mesg_text,m);
  	msgsnd(msgid, &message, sizeof(message),IPC_NOWAIT);
 	msgrcv(mid, &mess, sizeof(mess), 0, MSG_NOERROR);

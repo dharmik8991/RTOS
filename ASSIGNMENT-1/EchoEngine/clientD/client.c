@@ -27,7 +27,7 @@ int main()
  	scanf("%s",&m);
  	message.id=3;
  	message.mesg_text=m;
- 	msgsnd(msgid, &message, sizeof(message),IPC_NOWAIT); 
+ 	msgsnd(msgid, &message, sizeof(message),MSG_NOERROR); 
  	msgrcv(mid, &mess, sizeof(mess), 0, 1);
  	printf("Output:%c\n",mess.mesg_text);
  	//printf("\n");

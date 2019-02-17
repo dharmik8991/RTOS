@@ -22,7 +22,7 @@ Changing the type of data sent<br>(i.e Incorrect,data not found,sucessful reques
 *Trail3*<br>
 multiclient
 
-|  Sno |  Sending time  |  Service Time |  
+|  no of clients |  Sending time  |  Service Time |  
 |---|---|---|
 | 1 |    0.000005|  0.000004  | 
 |  2 |   0.000003 |  0.000005  |  

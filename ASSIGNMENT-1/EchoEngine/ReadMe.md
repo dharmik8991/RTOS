@@ -13,6 +13,8 @@ Sending same data multiple times<br>
 | 4 |    3|  16  | 
 |  5 |   3 |  16 |  
 |   6|    3| 16  | 
+
+
 *Trail2*<br>
 Changing the type of data sent<br>
 

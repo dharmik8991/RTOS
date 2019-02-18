@@ -3,17 +3,18 @@
 #include <ctype.h>
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
-#include <time.h>
-  
+#include <sys/time.h>
 // structure for message queue 
 struct mesg_buffer { 
 	int id;
     char mesg_text; 
 } message,mess; 
 
+
+
 int main()
 {
-	clock_t t,t1,t2;
+	struct timeval start, intermediate,stop;
 	 key_t key,clikey; 
     int msgid,mid; 
    char m;
@@ -29,13 +30,12 @@ int main()
  	scanf("%s",&m);
  	message.id=0;
  	message.mesg_text=m;
-	t=clock();
+	gettimeofday(&start, NULL);
  	msgsnd(msgid, &message, sizeof(message),IPC_NOWAIT);
-	t1=clock(); 
+  gettimeofday(&intermediate, NULL);
  	msgrcv(mid, &mess, sizeof(mess), 0, MSG_NOERROR);
-	t2=clock();
+	gettimeofday(&stop, NULL);
  	printf("Output:%c\n",mess.mesg_text);
-	printf("Time taken for sending:%f servicing request: %f\n",((double)(t1-t))/CLOCKS_PER_SEC,((double)(t2-t1))/CLOCKS_PER_SEC );
- 	//printf("\n");
+	printf("Sending time:%lu Response Time:%lu\n", (intermediate.tv_sec - start.tv_sec)*1000000 + (intermediate.tv_usec - start.tv_usec), (stop.tv_sec - intermediate.tv_sec)*1000000 + (stop.tv_usec - intermediate.tv_usec));
    }
 }

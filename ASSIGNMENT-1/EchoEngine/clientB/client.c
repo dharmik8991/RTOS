@@ -14,7 +14,7 @@ int main()
 {
 	 key_t key,clikey; 
     int msgid,mid; 
-   char m;
+   char m='a';
     // ftok to generate unique key 
     key = ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine",'s');
     clikey=ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine/clientA",1);  
@@ -24,7 +24,7 @@ int main()
 	mid = msgget(clikey, 0666 | IPC_CREAT);
    while(1)
    {
- 	scanf("%s",&m);
+ 	//scanf("%s",&m);
  	message.id=1;
  	message.mesg_text=m;
  	msgsnd(msgid, &message, sizeof(message), MSG_NOERROR); 

@@ -15,7 +15,7 @@ int main()
 {
 	 key_t key,clikey; 
     int msgid; 
-   char m[200];
+   char m[200]="GET airline01.h";
     // ftok to generate unique key 
     key = ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine",'a'); 
     clikey=ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine/clientA",1);
@@ -24,7 +24,7 @@ int main()
     msgid=msgget(key, 0666 | IPC_CREAT);
     int mid=msgget(clikey,0666 | IPC_CREAT); 
 while(1){
- 	scanf(" %[^\n]",m);
+ 	//scanf(" %[^\n]",m);
 	message.id=1;
  	strcpy(message.mesg_text,m);
  	msgsnd(msgid, &message, sizeof(message),IPC_NOWAIT);

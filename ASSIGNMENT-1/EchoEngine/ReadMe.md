@@ -5,30 +5,32 @@ Sending same data multiple times<br>
 
 
 
-|  Sno |  Sending time  |  Service Time |  
+|  Sno |  Sending time(in us) |  Service Time(in us) |  
 |---|---|---|
-| 1 |    0.000005|  0.000007  | 
-|  2 |   0.000005 |  0.000005  |  
-|   3|    0.000006| 0.000005  | 
-
+| 1 |    3|  26  | 
+|  2 |   3 |  18 |  
+|   3|    3| 17  | 
+| 4 |    3|  16  | 
+|  5 |   3 |  16 |  
+|   6|    3| 16  | 
 *Trail2*<br>
 Changing the type of data sent<br>
 
 
-|  Type |  Sending time  |  Service Time |  
+|  Type |  Sending time(in us)  |  Service Time(in us) |  
 |---|---|---|
-| lower |    0.000005|  0.000004  | 
-|  upper |   0.000004 |  0.000005  |  
-|   character|    0.000004| 0.000006  | 
+| lower |    4|  18  | 
+|  upper |   3 |  17  |  
+|   character|   3| 7  | 
 
 *Trail3*<br>
 multiclient
 
 
-|  no. of clients |  Sending time  |  Service Time |  
+|  no. of clients |  Sending time(in us)  |  Service Time(in us) |  
 |---|---|---|
-| 1 |    0.000004|  0.000004  | 
-|  2 |   0.000006 |  0.000005  |  
-|   3|    0.000003| 0.000006  | 
-|  4 |   0.000005 |  0.000005 |  
-|   5|    0.000004| 0.000006  | 
+| 1 |    3|  17  | 
+|  2 |   2 |  14 |  
+|   3|    3| 8  | 
+|  4 |   3 |  13 |  
+|   5|    2| 10 | 

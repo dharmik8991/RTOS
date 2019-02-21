@@ -30,29 +30,38 @@ int main()
 	mess.Id=num;
 	strcpy(mess.mesg_text,"");
 	char *split_text = strtok (g," ,.-");
-  if(strcmp(split_text,"GET")==0){
-  	split_text= strtok(NULL," ,-");
-	strcat(path,split_text);
-	//printf("%s\n",path);
-	FILE *fp=fopen(path,"r");
-	if(fp)
-	{ 
-			while(fscanf(fp,"%[^\n]",data)!=EOF){
-			strcat(mess.mesg_text,data);
-			strcat(mess.mesg_text,"\n");
-			//msgsnd(mid,&mess,sizeof(mess),1);
-			fscanf(fp,"%s",data);
-			strcat(mess.mesg_text,data);
-		}
-			msgsnd(mid[num],&mess,sizeof(mess),0);
-		//fc
-	}
-	else
-	{
-		strcpy(mess.mesg_text,"Data not found");
-		msgsnd(mid[num],&mess,sizeof(mess),IPC_NOWAIT);
-	}
+  if(strcmp(split_text,"GET")==0)
+  	{
+  		split_text= strtok(NULL," ,-");
+  		if(split_text!=NULL)
+  		{
+  			strcat(path,split_text);
+  			FILE *fp=fopen(path,"r");
+  			if(fp)
+  			{ 
+				while(fscanf(fp,"%[^\n]",data)!=EOF)
+				{
+					strcat(mess.mesg_text,data);
+					strcat(mess.mesg_text,"\n");
+					//msgsnd(mid,&mess,sizeof(mess),1);
+					fscanf(fp,"%s",data);
+					strcat(mess.mesg_text,data);
+				}
+				msgsnd(mid[num],&mess,sizeof(mess),0);
+			}
+			else
+			{
+				strcpy(mess.mesg_text,"Data not found");
+				msgsnd(mid[num],&mess,sizeof(mess),IPC_NOWAIT);
+			}
 			strcpy(path,"/home/dharmik/");
+		}
+		else
+		{
+			strcpy(mess.mesg_text,"Input incomplete");
+			msgsnd(mid[num],&mess,sizeof(mess),IPC_NOWAIT);
+		}
+
 }
 else{
 	strcpy(mess.mesg_text,"Incorrect input");

@@ -23,7 +23,7 @@ int main()
         exit(EXIT_FAILURE);
     }
       
-    // Forcefully attaching socket to the port 8080
+    // Forcefully attaching socket to the port 8081
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,&opt, sizeof(opt)))
     {
         perror("setsockopt");
@@ -53,9 +53,7 @@ int main()
     {
       while( (valread=read( new_socket , g, 200))>0)
       {
-        printf("%s\n",g);
         char *split_text = strtok (g," ,.-");
-        printf("%s\n",split_text );
         strcpy(response,"");
         if(strcmp(split_text,"GET")==0)
         {
@@ -74,6 +72,7 @@ int main()
   					    fscanf(fp,"%s",data);
   					    strcat(response,data);
   				    }
+			fclose(fp);
   			    }
             else
             {
@@ -89,9 +88,7 @@ int main()
         {
           strcpy(response,"Incorrect input");
         }
-        printf("dvdsgh%sdbfmn\n",response);
-        write(new_socket,response,strlen(response));
-	strcpy(response," ");
+        send(new_socket,response,sizeof(response),0);
       }
     }
   }

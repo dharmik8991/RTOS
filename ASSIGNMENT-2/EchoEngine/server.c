@@ -47,11 +47,7 @@ int main()
    while(1)
    {
     new_socket = accept(server_fd, (struct sockaddr *)&address,(socklen_t*)&addrlen);
-    if (new_socket < 0){
-			printf("Error accepting connection!\n");
-			exit(1);
-    }
-    else{
+ 
     if(fork()==0)
     {
      close(server_fd);
@@ -68,7 +64,6 @@ int main()
 			  c=tolower(c);
       }	
       send(new_socket,&c,1 , 0 );
-	}
 	}
 }
 close(new_socket);

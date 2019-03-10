@@ -45,7 +45,7 @@ int main()
    while(1)
    {
 	printf("Input:");
- 	scanf(" %c",&m);
+ 	m='w';
 	gettimeofday(&start, NULL);
  	send(sock,&m,sizeof(m),0);
 	gettimeofday(&intermediate, NULL);

@@ -50,7 +50,6 @@ int main()
  
     if(fork()==0)
     {
-     close(server_fd);
      while((valread=read( new_socket , &c, sizeof(c)))>0)
     {
       if(c>='a' && c<='z')
@@ -66,6 +65,5 @@ int main()
       send(new_socket,&c,1 , 0 );
 	}
 }
-close(new_socket);
 }
 }

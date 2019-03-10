@@ -18,7 +18,7 @@ int main()
    	 struct sockaddr_in address;
     int sock = 0, valread;
     struct sockaddr_in serv_addr;
-    char m[200],response[1024],t[100];
+    char m[200],response[1024];
     if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
     {
         printf("\n Socket creation error \n");
@@ -43,7 +43,7 @@ int main()
     }
    printf("Client Ready\n");
 while(1){
- 	scanf(" %[^\n]",m);
+ 	strcpy(m,"GET server.c");
 	gettimeofday(&start, NULL);
  	send(sock,m,sizeof(m),0);
 	gettimeofday(&intermediate, NULL);

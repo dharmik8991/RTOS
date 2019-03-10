@@ -41,18 +41,15 @@ int main()
         printf("\nConnection Failed \n");
         return -1;
     }
-   printf("ds\n");
+   printf("Client Ready\n");
 while(1){
  	strcpy(m,"GET server.c");
 	gettimeofday(&start, NULL);
  	send(sock,m,sizeof(m),0);
 	gettimeofday(&intermediate, NULL);
-	printf("aa%scdds\n",response);
 	read(sock,response,sizeof(response));
  	gettimeofday(&stop, NULL);
-    strcpy(t,response);
 	printf("Sending time:%lu Response Time:%lu\n", (intermediate.tv_sec - start.tv_sec)*1000000 + (intermediate.tv_usec - start.tv_usec), (stop.tv_sec - intermediate.tv_sec)*1000000 + (stop.tv_usec - intermediate.tv_usec));
 	printf("%s\n",response);
-    strcpy(response," ");
 	}
 }

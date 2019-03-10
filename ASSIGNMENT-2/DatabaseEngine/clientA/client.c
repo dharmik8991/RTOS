@@ -45,9 +45,9 @@ int main()
 while(1){
  	scanf(" %[^\n]",m);
 	gettimeofday(&start, NULL);
-    printf("sss\n");
  	send(sock,m,sizeof(m),0);
 	gettimeofday(&intermediate, NULL);
+	printf("aa%scdds\n",response);
 	read(sock,response,sizeof(response));
  	gettimeofday(&stop, NULL);
     strcpy(t,response);

@@ -4,31 +4,55 @@
 #include <sys/ipc.h> 
 #include <sys/msg.h> 
 #include<string.h>
-  
+#include <sys/time.h>
+#include <sys/socket.h>
+#include <netinet/in.h>
+#include <unistd.h>
+#define PORT 8081
 // structure for message queue 
-struct mesg_buffer { 
-    int id;
-    char mesg_text[200]; 
-} message,mess; 
 
 int main()
 {
+    struct timeval start,intermediate, stop;
 	 key_t key,clikey; 
-    int msgid; 
-   char m[200]="GET airline01.h";
-    // ftok to generate unique key 
-    key = ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine",'a'); 
-    clikey=ftok("/home/dharmik/rtos/ASSIGNMENT-1/EchoEngine/clientA",1);
-    // msgget creates a message queue 
-    // and returns identifier 
-    msgid=msgget(key, 0666 | IPC_CREAT);
-    int mid=msgget(clikey,0666 | IPC_CREAT); 
+   	 struct sockaddr_in address;
+    int sock = 0, valread;
+    struct sockaddr_in serv_addr;
+    char m[200],response[1024],t[100];
+    if ((sock = socket(AF_INET, SOCK_STREAM, 0)) < 0)
+    {
+        printf("\n Socket creation error \n");
+        return -1;
+    }
+  
+    memset(&serv_addr, '0', sizeof(serv_addr));
+  
+    serv_addr.sin_family = AF_INET;
+    serv_addr.sin_port = htons(PORT);
+      
+    // Convert IPv4 and IPv6 addresses from text to binary form
+    if(inet_pton(AF_INET, "127.0.0.1", &serv_addr.sin_addr)<=0) 
+    {
+        printf("\nInvalid address2/ Address not supported \n");
+        return -1;
+    }
+        if (connect(sock, (struct sockaddr *)&serv_addr, sizeof(serv_addr)) < 0)
+    {
+        printf("\nConnection Failed \n");
+        return -1;
+    }
+   printf("ds\n");
 while(1){
- 	//scanf(" %[^\n]",m);
-	message.id=1;
- 	strcpy(message.mesg_text,m);
- 	msgsnd(msgid, &message, sizeof(message),IPC_NOWAIT);
-	msgrcv(mid, &mess, sizeof(mess), 0, MSG_NOERROR);
-	printf("%s\n",mess.mesg_text);
+ 	scanf(" %[^\n]",m);
+	gettimeofday(&start, NULL);
+ 	send(sock,m,sizeof(m),0);
+	gettimeofday(&intermediate, NULL);
+	printf("aa%scdds\n",response);
+	read(sock,response,sizeof(response));
+ 	gettimeofday(&stop, NULL);
+    strcpy(t,response);
+	printf("Sending time:%lu Response Time:%lu\n", (intermediate.tv_sec - start.tv_sec)*1000000 + (intermediate.tv_usec - start.tv_usec), (stop.tv_sec - intermediate.tv_sec)*1000000 + (stop.tv_usec - intermediate.tv_usec));
+	printf("%s\n",response);
+    strcpy(response," ");
 	}
 }

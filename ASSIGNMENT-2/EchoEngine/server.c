@@ -23,7 +23,7 @@ int main()
         exit(EXIT_FAILURE);
     }
       
-    // Forcefully attaching socket to the port 8080
+    // Forcefully attaching socket to the port 8000
     if (setsockopt(server_fd, SOL_SOCKET, SO_REUSEADDR | SO_REUSEPORT,
                                                   &opt, sizeof(opt)))
     {
@@ -39,7 +39,7 @@ int main()
         perror("bind failed");
         exit(EXIT_FAILURE);
     }
-    if (listen(server_fd, 5) < 0)
+    if (listen(server_fd, 2) < 0)
     {
         perror("listen");
         exit(EXIT_FAILURE);
@@ -47,8 +47,14 @@ int main()
    while(1)
    {
     new_socket = accept(server_fd, (struct sockaddr *)&address,(socklen_t*)&addrlen);
+    if (new_socket < 0){
+			printf("Error accepting connection!\n");
+			exit(1);
+    }
+    else{
     if(fork()==0)
     {
+     close(server_fd);
      while((valread=read( new_socket , &c, sizeof(c)))>0)
     {
       if(c>='a' && c<='z')
@@ -63,7 +69,8 @@ int main()
       }	
       send(new_socket,&c,1 , 0 );
 	}
+	}
 }
-
+close(new_socket);
 }
 }

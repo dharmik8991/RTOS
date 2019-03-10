@@ -82,15 +82,16 @@ int main()
           }
           else
           {
-            strcpy(response,"Input incomplete  ");
+            strcpy(response,"Input incomplete ");
           }
         }
         else
         {
           strcpy(response,"Incorrect input");
         }
-        printf("%s\n",response);
+        printf("dvdsgh%sdbfmn\n",response);
         write(new_socket,response,strlen(response));
+	strcpy(response," ");
       }
     }
   }

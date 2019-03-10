@@ -1,6 +1,6 @@
 # Introduction
-clients A,C,D,E have user input type clients<br>
-client B has the loop input type client<br>marks.txt is the test file
+client A have user input type client<br>
+clients B,C,D,E has the loop input type clients<br>marks.txt is the test file
 
 # MY results
 

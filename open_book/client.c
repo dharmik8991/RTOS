@@ -65,7 +65,7 @@ int main()
         {
             if((valread=read(sock,message,sizeof(message))>0))
             {
-                fprintf(fp,"%s",message);
+                fprintf(fp,",%s",message);
                 printf("Data%d:%s\n",i,message);
             }
         }
